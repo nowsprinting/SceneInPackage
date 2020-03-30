@@ -1,0 +1,6 @@
+.npmrc
+.npmignore
+.gitignore
+.idea/**
+Makefile
+Makefile.meta
