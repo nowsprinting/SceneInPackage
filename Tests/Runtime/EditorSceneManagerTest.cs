@@ -1,5 +1,7 @@
+#if UNITY_EDITOR
 using System.Collections;
 using NUnit.Framework;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.TestTools;
@@ -10,22 +12,23 @@ namespace SceneInPackage
     /// Package内のSceneを<c>SceneManager</c>でロードするテストのサンプル
     /// </summary>
     [TestFixture]
-    public class SceneManagerTest
+    public class EditorSceneManagerTest
     {
         /// <summary>
         /// Package内の（Scene In Buildに含まれていない）Sceneをロードするテスト
         /// 
-        /// <c>ITestPlayerBuildModifier</c>を使用して一時的にScene in buildに追加しているため、プレイヤー実行でのみ成功します
+        /// UnityEditor.SceneManagement.EditorSceneManagerを使用しているため、エディタでのみ実行できます
         /// </summary>
         /// <returns></returns>
         [UnityTest]
-#if UNITY_EDITOR
-        [Ignore("Run on player only")]
-#endif
         public IEnumerator LoadSceneAsync_sceneNotInBuild_success()
         {
-            yield return SceneManager.LoadSceneAsync("SceneInPackage");
-            yield return SceneManager.LoadSceneAsync("SceneInPackage2", LoadSceneMode.Additive);
+            yield return EditorSceneManager.LoadSceneAsyncInPlayMode(
+                "Packages/com.nowsprinting.sceneinpackage/Tests/Scenes/SceneInPackage.unity", // Projectウィンドウ上のパス
+                new LoadSceneParameters(LoadSceneMode.Single));
+            yield return EditorSceneManager.LoadSceneAsyncInPlayMode(
+                "Packages/com.nowsprinting.sceneinpackage/Tests/Scenes/SceneInPackage2.unity", // Projectウィンドウ上のパス
+                new LoadSceneParameters(LoadSceneMode.Additive));
 
             var cube = GameObject.Find("Cube");
             Assert.That(cube, Is.Not.Null);
@@ -35,3 +38,4 @@ namespace SceneInPackage
         }
     }
 }
+#endif
