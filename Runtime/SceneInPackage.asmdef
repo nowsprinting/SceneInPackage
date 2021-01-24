@@ -1,9 +1,7 @@
 {
-    "name": "com.nowsprinting.sceneinpackage.Editor",
+    "name": "SceneInPackage",
     "references": [],
-    "includePlatforms": [
-        "Editor"
-    ],
+    "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": false,

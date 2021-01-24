@@ -1,9 +1,9 @@
 {
-    "name": "com.nowsprinting.sceneinpackage.Tests",
+    "name": "SceneInPackage.RuntimeTests",
     "references": [
         "UnityEngine.TestRunner",
         "UnityEditor.TestRunner",
-        "com.nowsprinting.sceneinpackage"
+        "SceneInPackage"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
